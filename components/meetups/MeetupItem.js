@@ -1,7 +1,17 @@
+import { useRouter } from 'next/router'; // this is our nextJS hook for routing
+
 import Card from '../ui/Card';
 import classes from './MeetupItem.module.css';
 
 function MeetupItem(props) {
+  const nextJSrouter = useRouter();
+
+  function showDetailsHandler(evt) {
+    evt.preventDefault();
+    console.log('CLICKED!')
+    nextJSrouter.push(`/${props.id}`);
+  }
+
   return (
     <li className={classes.item}>
       <Card>
@@ -13,7 +23,7 @@ function MeetupItem(props) {
           <address>{props.address}</address>
         </div>
         <div className={classes.actions}>
-          <button>Show Details</button>
+          <button onClick={showDetailsHandler}>Show Details</button>
         </div>
       </Card>
     </li>
