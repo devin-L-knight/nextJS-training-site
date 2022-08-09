@@ -1,10 +1,10 @@
-import { Fragment } from 'react';
+import classes from './MeetupDetails.module.css';   // this imports the classes associated with our component (all classes will be available as properties for us to use below)
 
 function MeetupDetails(props) {
     console.log('PROPS...', props)
 
     return (
-        <Fragment>
+        <section className={classes.detail}>
             <img
                 src={props?.image}
                 alt={props?.title}
@@ -12,7 +12,7 @@ function MeetupDetails(props) {
             <h1>{props?.title}</h1>
             <address>{props?.address}</address>
             <p>{props?.desciption}</p>
-        </Fragment>
+        </section>
     )
 }
 
