@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 // import other components needed here
 import NewMeetupForm from '../../components/meetups/NewMeetupForm';
 
@@ -5,6 +7,7 @@ import NewMeetupForm from '../../components/meetups/NewMeetupForm';
 
 // our domain for this is <our-domain-address>.com/new-meetup
 function NewMeetupPage() {
+    const router = useRouter();
 
     async function addMeetupHandler(enteredMeetupData) {
         console.log(enteredMeetupData)
@@ -21,6 +24,8 @@ function NewMeetupPage() {
         const data = await response.json();
 
         console.log(' DATA  >>>>>  ', data);
+
+        router.push('/'); // this will take us back to the site's starting page.
     }
 
     return (
