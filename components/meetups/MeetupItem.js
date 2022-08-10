@@ -8,7 +8,7 @@ function MeetupItem(props) {
 
   function showDetailsHandler(evt) {
     evt.preventDefault();
-    console.log('CLICKED!')
+    console.log('CLICKED!', props.id)
     nextJSrouter.push(`/${props.id}`);
   }
 
