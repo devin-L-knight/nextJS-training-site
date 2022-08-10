@@ -1,6 +1,7 @@
 // importing our components to be used in our home page
 // (Note: those from the Components folder are standard React components)
 import MeetupList from "../components/meetups/MeetupList";
+import { MongoClient } from 'mongodb'; // this will allow calls to the db in the cloud.
 
 
 const DUMMY_MEETUPS = [
@@ -47,14 +48,26 @@ function HomePage(props) {
 // the getStaticProps can run code that would usually run in the server (because the code that is executed here is not on the client and is ONLY run during the initial build process). This is a faster option to get props compared to the getServerSideProps above.
 export async function getStaticProps() {
     // fetch data from an API
+    const client = await MongoClient.connect('INSERT MONGO DB API LINK & LOGIN CREDENTIALS HERE'); // this includes the mongoDB user / password that has read/write access to databases.
+    const db = client.db();
+    const meetupsCollection = db.collection('meetups');
+    const retrievedMeetups = await meetupsCollection.find().toArray();
+
+    client.close();
 
     // this function MUST always return an object, which must have a nested props object.
     return {
         props: {
-            meetups: DUMMY_MEETUPS
+            meetups: retrievedMeetups.map(meetup => ({
+                    title: meetup.title,
+                    address: meetup.address,
+                    image: meetup.image,
+                    description: meetup.description,
+                    id: meetup._id.toString() // this is necessary to convert our unique id from Mongo db into a string.
+            }))
         },
         // revalidate is for "incremental static generation". This property wants a number that represents the number of seconds nextJS will wait before regenerating if requests come in for the page
-        revalidate: 5
+        revalidate: 1
     };
 }
 
