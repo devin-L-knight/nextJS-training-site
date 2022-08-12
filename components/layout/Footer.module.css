@@ -1,0 +1,18 @@
+
+.footer {
+    background-color: gray;
+    border-top: 1px solid lightgray;
+    bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer p {
+    color: white;
+    font-size: 0.875rem;
+}
+
+.footer a {
+    text-decoration: underline;
+    color: inherit;
+}
