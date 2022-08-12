@@ -8,7 +8,7 @@ function MeetupItem(props) {
 
   function showDetailsHandler(evt) {
     evt.preventDefault();
-    console.log('CLICKED!', props.id)
+    console.log(`CLICKED! Fetching Meetup ID '${props.id}' from MongoDB...`)
     nextJSrouter.push(`/${props.id}`);
   }
 
